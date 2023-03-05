@@ -10,3 +10,16 @@ function createGrid() {
 }
 
 createGrid();
+
+const squares = document.querySelectorAll('.grid-square');
+
+function changeSquareColor(square) {
+    square.classList.add('change-color');
+}
+
+squares.forEach((square) => {
+    square.addEventListener('mouseover', () => {
+        console.log(square);
+        changeSquareColor(square);
+    });
+});
