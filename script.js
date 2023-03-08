@@ -1,26 +1,14 @@
 const button = document.querySelector('#button');
 const gridContainer = document.querySelector('.grid-container');
 
-function getGridSize() {
-    const gridSize = prompt('Enter a number between 1 and 100', '');
+window.onload = createGrid();
 
-    if ((gridSize < 1) || (gridSize > 100)) {
-        alert('Please enter a number between 1 and 100');
-    } else {
-        return gridSize;
-    }
-}
+button.addEventListener('click', () => {
+    const gridSize = getGridSize();
 
-function changeSquareColor() {
-    const squares = document.querySelectorAll('.grid-square');
-    
-    squares.forEach((square) => {
-        square.addEventListener('mouseover', () => {
-            square.classList.add('change-color');
-            console.log(square);
-        });
-    });
-}
+    gridContainer.replaceChildren(); // remove the existing grid
+    createGrid(gridSize);
+});
 
 function createGrid(size = 16) {
     for (i = 1; i <= size * size; i++) {
@@ -36,11 +24,23 @@ function createGrid(size = 16) {
     changeSquareColor();
 }
 
-button.addEventListener('click', () => {
-    const newGridSize = getGridSize();
+function getGridSize() {
+    const gridSize = prompt('Enter a number between 1 and 100', '');
 
-    gridContainer.replaceChildren(); // remove the existing grid
-    createGrid(newGridSize);
-});
+    if ((gridSize < 1) || (gridSize > 100)) {
+        alert('Please enter a number between 1 and 100');
+        return;
+    }
+    
+    return gridSize;
+}
 
-window.onload = createGrid();
+function changeSquareColor() {
+    const squares = document.querySelectorAll('.grid-square');
+    
+    squares.forEach((square) => {
+        square.addEventListener('mouseover', () => {
+            square.classList.add('change-color');
+        });
+    });
+}
